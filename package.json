@@ -1,0 +1,20 @@
+{
+  "name": "new-recipe-generator",
+  "version": "1.0.0",
+  "description": "The better recipe generator built in react and tailwind",
+  "homepage": "https://github.com/Harv3yRig/New-Recipe-Generator#readme",
+  "bugs": {
+    "url": "https://github.com/Harv3yRig/New-Recipe-Generator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harv3yRig/New-Recipe-Generator.git"
+  },
+  "license": "ISC",
+  "author": "Harvey Riglar",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
