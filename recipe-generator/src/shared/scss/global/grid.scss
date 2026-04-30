@@ -1,0 +1,26 @@
+@use '../mixins/media-queries.scss' as query;
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    &__columns-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__columns-3 {
+        grid-template-columns: repeat(2, 1fr);
+
+        @include query.media-breakpoint-up(td) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    &__columns-4 {
+        grid-template-columns: repeat(2, 1fr);
+
+        @include query.media-breakpoint-up(td) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}

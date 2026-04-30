@@ -1,0 +1,34 @@
+@use 'sass:map';
+
+$breakpoints: (
+    'msm': 375px, //Mobile Small Resolution
+    'md': 480px, //Mobile Resolution
+    'td': 992px, //Desktop Small Resolution
+    'dmd': 1440px, //Desktop Medium Resolution
+    'dmlg': 1920px //Desktop Large Resolution
+) !default;
+
+$snap: dsm;
+
+@function getBreakpoint($size) {
+    @return map.get($breakpoints, $size);
+}
+
+@function breakpoint-min($name, $breakpoints: $breakpoints) {
+    $min: map.get($breakpoints, $name);
+    @if $min and $min > 0 {
+        @return $min;
+    }
+    @return null;
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
