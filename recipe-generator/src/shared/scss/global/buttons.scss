@@ -1,0 +1,36 @@
+.button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    display: inline-block;
+    position: relative;
+    font-weight: 600;
+
+    &::after {
+        content: '';
+        position: relative;
+        display: inline-block;
+        transform: scaleX(0);
+        height: 1px;
+        width: 100%;
+        background-color: #000;
+        opacity: 0;
+        transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+
+    .fa-chevron-right {
+        margin-left: 4px;
+        transition: margin-left .2s ease-in-out;
+    }
+
+    &:hover {
+        .fa-chevron-right { margin-left: 8px;}
+
+        &::after {
+            opacity: 1;
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    }
+}
