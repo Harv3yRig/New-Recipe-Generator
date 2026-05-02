@@ -3,13 +3,24 @@
 .grid {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 24px;
+
+    @include query.media-breakpoint-up(md) {
+        gap: 32px;
+    }
+
+    @include query.media-breakpoint-up(td) {
+        gap: 48px;
+    }
 
     &__columns-2 {
         grid-template-columns: repeat(2, 1fr);
     }
 
     &__columns-3 {
-        grid-template-columns: repeat(2, 1fr);
+        @include query.media-breakpoint-up(mlg) {
+            grid-template-columns: repeat(2, 1fr);
+        }
 
         @include query.media-breakpoint-up(td) {
             grid-template-columns: repeat(3, 1fr);
@@ -17,7 +28,9 @@
     }
 
     &__columns-4 {
-        grid-template-columns: repeat(2, 1fr);
+        @include query.media-breakpoint-up(mlg) {
+            grid-template-columns: repeat(2, 1fr);
+        }
 
         @include query.media-breakpoint-up(td) {
             grid-template-columns: repeat(4, 1fr);
