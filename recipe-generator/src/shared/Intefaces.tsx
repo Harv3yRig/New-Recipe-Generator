@@ -1,16 +1,3 @@
-export interface ExtendedIngredient {
-    name: string;
-    amount: number;
-    unit: string;
-    meta: string[];
-}
-
-export interface Ingredient {
-    name: string;
-    amount: number;
-    unit: string;
-}
-
 export interface Recipe {
     id: number;
     title: string;
@@ -21,9 +8,10 @@ export interface Recipe {
     vegan: boolean;
     glutenFree: boolean;
     dairyFree: boolean;
-    extendedIngredients: ExtendedIngredient[];
-    ingredients: Ingredient[];
+    extendedIngredients: string[];
+    ingredients: string[];
     instructions: string[];
+    nutrition: string[];
 }
 
 export const apiUrl = "https://api.spoonacular.com/recipes/complexSearch?"

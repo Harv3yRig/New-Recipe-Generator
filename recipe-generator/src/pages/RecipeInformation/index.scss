@@ -1,0 +1,133 @@
+@use '../../shared/scss/mixins/media-queries.scss' as query;
+
+.recipe-information {
+    height: 100vh;
+    width: 100vw;
+    grid-template-rows: 1fr 2fr;
+
+    @include query.media-breakpoint-up(mlg) {
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+    }
+
+    &__image {
+        &-img {
+            height: 40vh;
+            object-fit: cover;
+            width: 100vw;
+            transition: width 0.3s ease-in-out;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            z-index: 10;
+
+            @include query.media-breakpoint-up(mlg) {
+                height: 100vh;
+                width: 40vw;
+                border-top-right-radius: 24px;
+                border-bottom-right-radius: 24px;
+
+                &:hover {
+                    width: 95vw;
+                }
+            }
+        }
+
+        .fa-chevron-right {
+            display: none;
+        }
+
+        @include query.media-breakpoint-up(mlg) {
+            &:hover {
+                .recipe-information__image-img {width: 95vw;}
+                .fa-chevron-right {
+                    opacity: 1;
+                }
+            }
+
+            .fa-chevron-right {
+                display: block;
+                opacity: 0;
+                width: 5vw;
+                height: 10vh;
+                transition: opacity 0.5s ease-in-out;
+
+                &:hover .recipe-information__image-img {
+                    width: 95vw;
+                }
+            }
+        }
+    }
+
+    &__content {
+        overflow: scroll;
+        align-content: center;
+        margin-bottom: 24px;
+
+    }
+
+    &__details {
+        border: 1px solid #fff;
+        border-radius: 24px;
+        padding: 16px;
+        margin-bottom: 24px;
+        background: #152331;
+        background: -webkit-linear-gradient(to right, #000000, #152331);
+        background: linear-gradient(to right, #000000, #152331);
+
+        &::details-content {
+            height: 0;
+            overflow: scroll;
+            transition: height 0.3s ease-in-out;
+        }
+
+        &-summary {
+            display: flex;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+
+            .summary-icon {
+                height: 30px;
+                width: 30px;
+
+                &::after, &::before {
+                    content: "";
+                    display: inline-block;
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    background-color: white;
+                }
+
+                &::after {
+                    height: 4px;
+                    bottom: 42px;
+                }
+
+                &::before {
+                    width: 4px;
+                    left: 13px;
+                    transition: transform 0.25s ease-out;
+
+                }
+            }
+        }
+
+        &[open] > &-summary {
+            margin-bottom: 16px;
+
+            .summary-icon::before {
+                transform: rotate(90deg);
+            }
+        }
+
+        &[open]::details-content {
+            height: 50vh;
+        }
+    }
+}
+
+body:has(.recipe-information) {
+    overflow: hidden;
+}
