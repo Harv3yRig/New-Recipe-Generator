@@ -1,7 +1,7 @@
 import { type Recipe } from '../../shared/Intefaces'
 import './index.scss';
 
-export const RecipeCard = ({ recipe }: { recipe: Recipe }) => {
+export const RecipeCard = ({ recipe, onViewDetails }: { recipe: Recipe, onViewDetails: (recipe: Recipe) => void }) => {
     const diets = [];
     if (recipe.vegetarian) diets.push('Vegetarian');
     if (recipe.vegan) diets.push('Vegan');
@@ -23,9 +23,9 @@ export const RecipeCard = ({ recipe }: { recipe: Recipe }) => {
                         ))}
                     </div>
                     }
-                    <button className='button'>
+                    <button className='button' onClick={() => onViewDetails(recipe)}>
                         View Details
-                        <i className="fa-solid fa-chevron-right"></i>
+                        <i className="fa-solid fa-chevron-right"/>
                     </button>
                 </div>
             </div>

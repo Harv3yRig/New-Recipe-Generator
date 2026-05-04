@@ -3,15 +3,16 @@ import { RecipeCard } from '../../elements/RecipeCard'
 
 type ViewRecipesProps = {
     recipes: Recipe[]
+    setActiveRecipe: (recipe: Recipe) => void
 }
 
-export const ViewRecipes = ({ recipes }: ViewRecipesProps) => {
+export const ViewRecipes = ({ recipes, setActiveRecipe }: ViewRecipesProps) => {
     return (
         <div className='container'>
             <h1 className='flex flex-center'>View Recipes</h1>
             <div className="grid grid__columns-3 card-grid">
                 {recipes.map((recipe, index) => (
-                    <RecipeCard key={index} recipe={recipe} />
+                    <RecipeCard key={index} recipe={recipe} onViewDetails={setActiveRecipe} />
                 ))}
             </div>
         </div>
