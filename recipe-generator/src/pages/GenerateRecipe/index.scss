@@ -1,0 +1,75 @@
+.generate-recipe {
+
+    h1 {text-align: center;}
+
+    &__filters, &__parameters {gap: 24px;}
+
+    &__parameters {
+        text-align: start;
+
+        input {
+            font: 700 1.5rem/1.2 "Segoe UI", sans-serif;
+            width: 100%;
+            padding: 18px;
+            border-radius: 24px;
+            border: none;
+            background: #152331;
+            background: -webkit-linear-gradient(to right, #000000, #152331);
+            background: linear-gradient(to right, #000000, #152331);
+            color: #fff;
+            transition: border-radius 0.25s ease-out;
+        }
+
+        :has(.ingredients-list) input:not(.generate-recipe__key) {
+            border-radius: 24px 24px 0 0;
+        }
+
+        .ingredients-list {
+            background: #152331;
+            margin: 0;
+            padding: 18px;
+            gap: 10px;
+            border-radius: 0 0 24px 24px;
+            transition: all .25s ease-out;
+            width: 100%;
+            list-style: none;
+
+            &-item {
+                font: 700 1.25rem/1.2 "Segoe UI", sans-serif;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transform-origin: top center;
+                animation: rollDown 0.35s ease-out;
+            }
+        }
+
+        .ingredient-remove {
+            background: none;
+            border: none;
+            color: #fff;
+        }
+
+        .button {margin-top: 32px;}
+
+        @keyframes rollDown {
+            from {
+                opacity: 0;
+                transform: perspective(500px) translateY(-16px) rotateX(-15deg);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(500px) translateY(0) rotateX(0deg);
+            }
+        }
+    }
+
+    &__key {
+        margin-top: 32px;
+    }
+
+    &__filters {
+        text-align: end;
+        margin-left: 48px;
+    }
+}

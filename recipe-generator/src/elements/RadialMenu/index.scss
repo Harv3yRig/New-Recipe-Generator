@@ -1,0 +1,83 @@
+.radial-menu {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-left: auto;
+    border-radius: calc(infinity * 1px);
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+
+    &__item {
+        position: absolute;
+        inset: 0;
+        transform-origin: center;
+        clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+        background: radial-gradient(circle at 50% 50%, #ffffff0f, transparent 55%),
+            linear-gradient(135deg, #0f1f34 0%, #1d3352 100%);
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.25);
+        }
+
+        &.item-0 {
+            transform: rotate(0deg);
+
+            .radial-menu__label {
+                top: 45%;
+                right: 5%;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        &.item-1 {
+            transform: rotate(90deg);
+
+            .radial-menu__label {
+                top: 50%;
+                right: 16%;
+                transform: translate(0, -50%) rotate(-90deg);
+            }
+        }
+
+        &.item-2 {
+            transform: rotate(180deg);
+
+            .radial-menu__label {
+                top: 47%;
+                right: 0%;
+                transform: translate(-50%, 0) rotate(-180deg);
+            }
+        }
+
+        &.item-3 {
+            transform: rotate(270deg);
+
+            .radial-menu__label {
+                top: 50%;
+                left: 70%;
+                transform: translate(0, -50%) rotate(90deg);
+            }
+        }
+    }
+
+    &__label {
+        position: absolute;
+        cursor: pointer;
+    }
+
+    &__checkbox {
+        position: absolute;
+        appearance: none;
+        inset: 0;
+        transform-origin: center;
+        clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+        background: radial-gradient(circle at 50% 50%, #ffffff0f, transparent 55%),
+            linear-gradient(135deg, #0f1f34 0%, #1d3352 100%);
+        cursor: pointer;
+
+        &:checked {
+            background: linear-gradient(to right, #000000, #152331);
+        }
+    }
+}
