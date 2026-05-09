@@ -6,10 +6,8 @@ interface GenerateRecipeProps {
   ingredients: string[];
   addIngredient: (ingredient: string) => void;
   removeIngredient: (index: number) => void;
-  selectedAllergies: string[];
-  selectedDiets: string[];
-  updateAllergies: (allergies: string[]) => void;
   updateDiets: (diets: string[]) => void;
+  updateIntolerances: (intolerances: string[]) => void;
   onGenerateRecipes: () => void;
   apiKey: string;
   updateApiKey: (apiKey: string) => void;
@@ -19,9 +17,7 @@ export const GenerateRecipe = ({
   ingredients, 
   addIngredient, 
   removeIngredient,
-  selectedAllergies,
-  selectedDiets,
-  updateAllergies,
+  updateIntolerances,
   updateDiets,
   onGenerateRecipes,
   apiKey,
@@ -88,7 +84,7 @@ export const GenerateRecipe = ({
         </div>
         <div className='flex flex-column generate-recipe__filters'>
           <h2>Allergies/Dietary Requirements</h2>
-          <RadialMenu inputs={['Dairy', 'Gluten', 'Nuts', 'Shellfish']} onSelectionChange={updateAllergies} />
+          <RadialMenu inputs={['Dairy', 'Gluten', 'Nuts', 'Shellfish']} onSelectionChange={updateIntolerances} />
           <RadialMenu inputs={['Vegan', 'Vegetarian', 'Pescatarian', 'Keto']} onSelectionChange={updateDiets} />
         </div>
       </div>
