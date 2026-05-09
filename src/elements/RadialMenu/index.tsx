@@ -6,7 +6,7 @@ interface RadialMenuProps {
 }
 
 export const RadialMenu = ({ inputs, onSelectionChange }: RadialMenuProps) => {
-    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCheckboxChange = () => {
         if (!onSelectionChange) return;
         const selected = inputs.filter((_, index) => {
             const checkbox = document.getElementById(inputs[index]) as HTMLInputElement;
