@@ -1,73 +1,150 @@
-# React + TypeScript + Vite
+# Recipe Generator App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + TypeScript + Vite application that generates recipe suggestions based on ingredients, diet preferences, and intolerances using the Spoonacular API.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Generate recipes based on entered ingredients
+- Optional diet preference selection
+- Optional food intolerance selection
+- Fetch detailed recipe information including:
+  - Ingredients
+  - Instructions
+  - Nutrition data
+  - Images
+- View recipe details
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- Vite
+- Spoonacular API
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## How It Works
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Enter ingredients in the generate form
+2. Optionally select diets and intolerances
+3. Provide your Spoonacular API key
+4. Click **Generate Recipes**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The app calls Spoonacular’s `complexSearch` endpoint with the following parameters:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```ts
+query=<ingredient list>
+addRecipeInformation=true
+fillIngredients=true
+addRecipeNutrition=true
+addRecipeInstructions=true
+number=10
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The API response is mapped into the app’s `Recipe` shape and displayed in the `ViewRecipes` page.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+From the results page, users can:
+- View detailed recipe information
+- Return to the generate page
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Project Structure
+
+```bash
+src/
+│
+├── App.tsx
+│   Main app logic and state handling
+│
+├── components/
+│   ├── GenerateRecipe.tsx
+│   │   Ingredient input, diet/intolerance selection,
+│   │   API key entry, and generate button
+│   │
+│   ├── ViewRecipes.tsx
+│   │   Displays fetched recipes and includes the back button
+│   │
+│   └── RecipeInformation.tsx
+│       Shows detailed recipe data for a selected recipe
 ```
+
+---
+
+## Getting a Spoonacular API Key
+
+1. Visit the Spoonacular Food API website:
+
+   [Spoonacular Food API](https://spoonacular.com/food-api?utm_source=chatgpt.com)
+
+2. Sign up for a free account or log in
+
+3. Open your dashboard or API section
+
+4. Copy your API key
+
+5. Paste the API key into the app when generating recipes
+
+---
+
+## Installation
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## Running the App
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open the app in your browser using the address shown in the terminal.
+
+---
+
+## Usage Notes
+
+- You must provide:
+  - At least one ingredient
+  - A valid Spoonacular API key
+
+- If no recipes are found, the app displays:
+
+```text
+No recipes found.
+```
+
+---
+
+## Example Search
+
+### Ingredients
+```text
+chicken, rice, broccoli
+```
+
+### Diet
+```text
+High Protein
+```
+
+### Intolerance
+```text
+Dairy
+```
+
+The app will generate recipe suggestions matching those preferences.
+
+---
+
+## License
+
+This project is open source and available under the MIT License.
