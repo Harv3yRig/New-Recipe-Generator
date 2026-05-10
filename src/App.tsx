@@ -57,7 +57,6 @@ function App() {
 
   const generateRecipes = async () => {
     const { ingredients, selectedDiets, apiKey, selectedIntolerances } = state
-    console.log('Generating recipes with:', { ingredients, selectedDiets, apiKey, selectedIntolerances })
     if (!ingredients.length || !apiKey) {
       console.error('Please add ingredients and API key')
       return
@@ -81,12 +80,28 @@ function App() {
     try {
       const response = await fetch(url)
       const data = await response.json()
-      console.log('Recipes fetched:', data)
-      setState(prev => ({ ...prev, recipes: (data.results as any[]).map(mapRecipe), page: 'view', loading: false }))
+      const results = Array.isArray(data?.results) ? data.results : []
+      if (!response.ok) {
+        console.error('Error fetching recipes:', data?.message || response.statusText)
+      }
+      setState(prev => ({ ...prev, recipes: results.map(mapRecipe), page: 'view', loading: false }))
     } catch (error) {
       console.error('Error fetching recipes:', error)
       setState(prev => ({ ...prev, loading: false }))
     }
+  }
+
+  const resetToGenerate = () => {
+    setState({
+      activeRecipe: null,
+      ingredients: [],
+      selectedIntolerances: [],
+      selectedDiets: [],
+      apiKey: '',
+      loading: false,
+      recipes: [],
+      page: 'generate'
+    })
   }
 
   if (state.activeRecipe) {
@@ -94,7 +109,11 @@ function App() {
   }
 
   if (state.page === 'view') {
-    return <ViewRecipes recipes={state.recipes} setActiveRecipe={(recipe) => setState(prev => ({ ...prev, activeRecipe: recipe }))} />
+    return <ViewRecipes
+      recipes={state.recipes}
+      setActiveRecipe={(recipe) => setState(prev => ({ ...prev, activeRecipe: recipe }))}
+      onBack={resetToGenerate}
+    />
   }
 
   return <GenerateRecipe 
